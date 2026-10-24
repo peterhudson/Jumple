@@ -287,14 +287,6 @@ function renderPath() {
   cur.className = msg ? `msg ${msg.kind}` : '';
   cur.innerHTML = msg ? '' : word + (typedMiss ? `<span class="bad">${typedMiss}</span>` : '');
   if (msg) cur.textContent = msg.text;
-  // Jump lines join the tapped letters in order.
-  const wrap = $('board-wrap').getBoundingClientRect();
-  const all = tiles();
-  const pts = path.map((i) => {
-    const r = all[i].getBoundingClientRect();
-    return `${r.left + r.width / 2 - wrap.left},${r.top + r.height / 2 - wrap.top}`;
-  });
-  $('trail').innerHTML = pts.length > 1 ? `<polyline points="${pts.join(' ')}"/>` : '';
 }
 
 function render() {
@@ -477,7 +469,6 @@ rules.querySelector('.back').onclick = () => showStep(step - 1);
 rules.querySelector('.next').onclick = () => (step < steps.length - 1 ? showStep(step + 1) : rules.close());
 rules.querySelector('.close').onclick = () => rules.close();
 $('help').onclick = openRules;
-window.addEventListener('resize', renderPath);
 
 showHome();
 if (!store.get('jumple:seen-rules')) { store.set('jumple:seen-rules', true); openRules(); }
