@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jumple</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐸</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <button id="back" class="icon" aria-label="All Jumples" hidden>‹</button>
+    <h1>Jumple</h1>
+    <button id="help" class="icon" aria-label="How to play">?</button>
+  </header>
+
+  <main id="home">
+    <p class="lede">Make words from nine letters. Jump from any letter to any other: they don't need to touch. A new Jumple every day.</p>
+    <button id="today" class="level today"></button>
+    <h2 id="earlier-head" class="group-head">Earlier Jumples</h2>
+    <ul id="earlier"></ul>
+  </main>
+
+  <main id="game" hidden>
+    <h2 id="board-name"></h2>
+    <!-- Like Squaredle, the word count opens the word list, so nobody has to scroll past the board. -->
+    <button id="count" aria-haspopup="dialog"><span class="words-count"></span> <span class="tap">Tap for the word list and hints</span></button>
+    <div id="progress" aria-label="Progress">
+      <div class="bar"><div class="fill"></div></div>
+      <div class="stars"></div>
+    </div>
+    <div id="current" aria-live="polite"></div>
+    <div id="board-wrap">
+      <div id="board"></div>
+      <svg id="trail" aria-hidden="true"></svg>
+    </div>
+    <div class="controls">
+      <button id="shuffle" class="pill">⤨ Shuffle</button>
+      <button id="delete" class="pill" aria-label="Delete last letter">⌫</button>
+      <button id="enter" class="pill primary">Enter</button>
+    </div>
+  </main>
+
+  <dialog id="words" aria-labelledby="words-title">
+    <!-- The title bar stays put while the list scrolls, so the × is always in reach. -->
+    <div class="sheet-head">
+      <h2 id="words-title">Words</h2>
+      <button class="close icon" aria-label="Close">×</button>
+    </div>
+    <p id="words-msg" aria-live="polite"></p>
+    <div class="sheet-body">
+    <section id="hints" hidden>
+      <h3>Hints</h3>
+      <label><input type="checkbox" id="hint-letters"> Show some letters</label>
+      <label><input type="checkbox" id="hint-sort"> Sort words alphabetically</label>
+    </section>
+    <section id="word-list"></section>
+    <section id="bonus-list"></section>
+    <p class="reset-row"><button id="reset" class="link">Start this board over</button></p>
+    </div>
+  </dialog>
+
+  <dialog id="complete" aria-labelledby="complete-title">
+    <h2 id="complete-title">🎉 Board complete!</h2>
+    <p class="summary"></p>
+    <p class="complete-nav">
+      <button class="pill primary go"></button>
+      <button class="pill home">All Jumples</button>
+      <button class="link stay">Stay on this board</button>
+    </p>
+  </dialog>
+
+  <dialog id="rules" aria-labelledby="rules-title">
+    <button class="close icon" aria-label="Close">×</button>
+    <div class="step">
+      <h2 id="rules-title">How to play</h2>
+      <p>Make words from the nine letters. Unlike Squaredle, the letters don't need to touch: jump from any letter to any other.</p>
+      <div class="demo" aria-hidden="true">
+        <span class="on">S</span><span>A</span><span class="on">T</span>
+        <span>O</span><span>R</span><span>W</span>
+        <span class="on">N</span><span>L</span><span class="on">E</span>
+      </div>
+      <p>Tap the letters in order, or type the word, then press Enter. Words need at least 4 letters, and each letter can be used once per word. Here, <b>T, E, N, S</b> makes TENS.</p>
+    </div>
+    <div class="step" hidden>
+      <h2>Earn stars</h2>
+      <p>Longer words score more. Tap the word count above the board to see your words. Rarer words count as bonus words but don't add points.</p>
+      <div class="demo-tile" aria-hidden="true"><span class="letter">R</span><span class="n start">3</span><span class="n use">7</span></div>
+      <p><b>★ First star:</b> a <span class="num red">red</span> number shows how many words still to find start with each letter.</p>
+      <p><b>★ Second star:</b> a <span class="num white">white</span> number shows how many words still to find use each letter.</p>
+      <p>A letter fades once every word that uses it is found.</p>
+    </div>
+    <div class="step" hidden>
+      <h2>Hints</h2>
+      <p><b>★ Third star:</b> hints appear above the word list.</p>
+      <p><b>Show some letters</b> reveals the start (and, for long words, the end) of each word you haven't found yet.</p>
+      <p><b>Sort words alphabetically</b> puts the missing words in order among the ones you've found.</p>
+      <p><b>💡 Reveals</b> light up a 4, 5 or 6 letter word on the board for you to tap out. You get one per board, plus one for the third star.</p>
+      <p><b>⤨ Shuffle</b> moves the letters around, which can help you spot new words.</p>
+    </div>
+    <nav class="steps-nav">
+      <button class="pill back">Back</button>
+      <span class="dots"></span>
+      <button class="pill primary next">Next</button>
+    </nav>
+  </dialog>
+
+  <script src="boards.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
