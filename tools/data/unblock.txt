@@ -1,0 +1,20 @@
+# Words on blocklist.txt that are everyday words the list catches. They count as
+# normal words; any other blocklist word rejects the whole board.
+BUTT
+ESCORT
+SNATCH
+SUCK
+SUCKS
+GROPE
+SCAT
+SKEET
+SPUNK
+KINKY
+HOOKER
+POOF
+EUNUCH
+SADISM
+VOYEUR
+BONDAGE
+HARDCORE
+TOPLESS
